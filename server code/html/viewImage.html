@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<style>
+			body{
+				background-color: #181818;
+			}
+			img{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+			#imgThing{
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="lastProperImg" src="captureEye.jpg">
+		<img id="imgThing" src="captureEye.jpg">
+		<script>
+			var newImage = new Image();
+			newImage.src = "captureEye.jpg";
+
+			function updateImg(){
+				newImage = new Image();
+				newImage.src = "captureEye.jpg?" + new Date().getTime()
+				document.getElementById("imgThing").src = newImage.src;
+				document.getElementById("imgThing").onload = function(){
+					document.getElementById("lastProperImg").src = newImage.src;
+					document.getElementById("imgThing").style.visibility = "visible";
+				}
+				document.getElementById("imgThing").onerror = function(){
+					document.getElementById("imgThing").style.visibility = "hidden";
+				}
+			}
+			setInterval(updateImg, 300);
+		</script>
+	</body>
+
+</html>
